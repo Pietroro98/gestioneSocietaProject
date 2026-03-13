@@ -31,8 +31,12 @@ public class Societa
 
     public Societa() {}
 
-    public Societa(Long id_societa, String ragioneSociale, String indirizzo, LocalDate dataFondazione, LocalDate dataChiusura) {
-        this.id_societa = id_societa;
+    public Societa(String ragioneSociale, String indirizzo, LocalDate dataFondazione) {
+        this.ragioneSociale = ragioneSociale;
+        this.indirizzo = indirizzo;
+        this.dataFondazione = dataFondazione;
+    }
+    public Societa(String ragioneSociale, String indirizzo, LocalDate dataFondazione, LocalDate dataChiusura) {
         this.ragioneSociale = ragioneSociale;
         this.indirizzo = indirizzo;
         this.dataFondazione = dataFondazione;

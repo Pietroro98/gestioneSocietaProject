@@ -24,10 +24,10 @@ public class GestionesocietaApplication implements CommandLineRunner {
 		// inserisco la batteria dei test che eseguo su BatteriaDiTestService.
 
 		batteriaDiTestService.testInserisciNuovaSocieta();
-		// batteriaDiTestService.testInserisciNuovaSocietaConControlloDuplicato();
+		batteriaDiTestService.testInserisciNuovaSocietaConControlloDuplicato();
 		batteriaDiTestService.testFindByExampleSocieta();
 		batteriaDiTestService.testInserisciDipendenteConSocieta();
-		// batteriaDiTestService.testRimozioneSocietaConDipendenti();
+		batteriaDiTestService.testRimozioneSocietaConDipendenti();
 		batteriaDiTestService.testInserisciProgetto();
 		batteriaDiTestService.testCollegaDipendenteAProgetti();
 		batteriaDiTestService.testCollegaProgettoADipendenti();

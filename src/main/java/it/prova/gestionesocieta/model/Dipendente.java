@@ -37,8 +37,7 @@ public class Dipendente {
 
     public Dipendente() {}
 
-    public Dipendente(Long id_dipendente, String nome, String cognome, LocalDate dataAssunzione, Integer redditoAnnuoLordo) {
-        this.id_dipendente = id_dipendente;
+    public Dipendente( String nome, String cognome, LocalDate dataAssunzione, Integer redditoAnnuoLordo) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataAssunzione = dataAssunzione;

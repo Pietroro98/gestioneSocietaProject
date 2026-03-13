@@ -25,12 +25,16 @@ public class BatteriaDiTestService {
 
 
     public void testInserisciNuovaSocieta() {
-        Societa societaInstance = new Societa();
-        societaInstance.setRagioneSociale("ACME SPA");
-        societaInstance.setIndirizzo("Via Roma 10");
-        societaInstance.setDataFondazione(LocalDate.of(1985, 3, 12));
 
-        societaService.inserisciNuovoConControlloDuplicato(societaInstance);
+        List<Societa> societaList = List.of(
+                new Societa("ACME SPA", "Via Roma 10", LocalDate.of(1985,3,12)),
+                new Societa("Tech Solutions SRL", "Via Milano 45", LocalDate.of(1995,7,20)),
+                new Societa("Global Software SPA", "Via Napoli 8", LocalDate.of(2005,11,3))
+        );
+
+        for (Societa s : societaList) {
+            societaService.inserisciNuovoConControlloDuplicato(s);
+        }
     }
 
     public void testInserisciNuovaSocietaConControlloDuplicato() {
@@ -51,7 +55,7 @@ public class BatteriaDiTestService {
     }
 
     public void testRimozioneSocietaConDipendenti() {
-        Societa societa = societaService.listAll().get(0);
+        Societa societa = societaService.listAll().get(1);
         Societa societaInstance = societaService.findByExample(societa).stream().findFirst().orElse(null);
 
         assert societaInstance != null;
@@ -97,4 +101,6 @@ public class BatteriaDiTestService {
 
         progettoService.collegaProgettoADipendenti(progettoInstance.getId_progetto(), idsDipendenti);
     }
+
+
 }
