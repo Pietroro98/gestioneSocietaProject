@@ -5,5 +5,5 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 public interface SocietaRepository extends CrudRepository<Societa, Long>, QueryByExampleExecutor<Societa>
 {
-
+    public Societa findByRagioneSociale(String ragioneSociale);
 }

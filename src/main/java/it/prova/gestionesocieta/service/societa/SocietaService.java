@@ -12,6 +12,12 @@ public interface SocietaService
 
     public void inserisciNuovo(Societa societaInstance);
 
+    public void inserisciNuovoConControlloDuplicato(Societa societaInstance);
+
+    public List<Societa> findByExample(Societa example);
+
+    public void rimozioneSocietaConControllo(Long idSocieta);
+
     public void rimuovi(Long idSocieta);
 
 }
