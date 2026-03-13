@@ -31,7 +31,7 @@ public class Dipendente {
     @JoinColumn(name = "societa_id", nullable = false)
     private Societa societa;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
     @JoinTable(name = "dipendente_progetto", joinColumns = @JoinColumn(name = "dipendente_id"), inverseJoinColumns = @JoinColumn(name = "progetto_id"))
     private Set<Progetto> progetti = new HashSet<Progetto>();
 

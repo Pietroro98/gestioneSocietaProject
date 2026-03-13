@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional(readOnly = true)
@@ -24,7 +25,8 @@ public class SocietaServiceImpl implements SocietaService
 
     @Override
     public List<Societa> listAll() {
-        return (List<Societa>) societaRepository.findAll();
+        return StreamSupport.stream(societaRepository.findAll().spliterator(), false)
+                .toList();
     }
 
     @Override

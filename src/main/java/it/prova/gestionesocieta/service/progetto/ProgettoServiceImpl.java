@@ -1,12 +1,19 @@
 package it.prova.gestionesocieta.service.progetto;
 
+import it.prova.gestionesocieta.model.Dipendente;
 import it.prova.gestionesocieta.model.Progetto;
+import it.prova.gestionesocieta.reporitory.DipendenteRepository;
 import it.prova.gestionesocieta.reporitory.ProgettoRepository;
+import it.prova.gestionesocieta.service.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional(readOnly = true)
@@ -15,13 +22,22 @@ public class ProgettoServiceImpl implements ProgettoService
     @Autowired
     private ProgettoRepository progettoRepository;
 
+    @Autowired
+    private DipendenteRepository dipendenteRepository;
+
+    @Autowired
+    private Utils utils;
+
     public List<Progetto> findAll(){
-        return (List<Progetto>) progettoRepository.findAll();
+        return StreamSupport.stream(progettoRepository.findAll().spliterator(), false)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
+    @Transactional
     public List<Progetto> listAll() {
-        return (List<Progetto>) progettoRepository.findAll();
+        return StreamSupport.stream(progettoRepository.findAll().spliterator(), false)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
@@ -41,5 +57,18 @@ public class ProgettoServiceImpl implements ProgettoService
         progettoRepository.save(progettoInstance);
     }
 
+    @Override
+    @Transactional
+    public void collegaProgettoADipendenti(Long idProgetto, List<Long> idsDipendenti)
+    {
+        Progetto progettoInstance = progettoRepository.findById(idProgetto).orElseThrow(() -> new RuntimeException("Progetto non trovato"));
 
+        List<Dipendente> dipendenti = (List<Dipendente>) dipendenteRepository.findAllById(idsDipendenti);
+        Set<Dipendente> dipendentiDaCollegare = dipendenti
+                .stream()
+                .peek(d -> utils.valida(d, progettoInstance))
+                .collect(Collectors.toSet());
+
+        progettoInstance.getDipendenti().addAll(dipendentiDaCollegare);
+    }
 }

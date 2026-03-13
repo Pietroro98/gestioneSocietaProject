@@ -13,4 +13,7 @@ public interface ProgettoService {
 
     public void inserisciNuovo(Progetto progettoInstance);
 
+    public void collegaProgettoADipendenti(Long idProgetto, List<Long> idsDipendenti);
+
+
 }

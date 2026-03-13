@@ -75,4 +75,26 @@ public class BatteriaDiTestService {
         dipendenteService.inserisciNuovoDipendenteConSocieta(societaInstance.getId_societa(), dipendenteInstance);
     }
 
+    public void testInserisciProgetto() {
+        Progetto progettoInstance = new Progetto();
+        progettoInstance.setNome("Migrazione su Spring");
+        progettoInstance.setCliente("Cliente test uno");
+        progettoInstance.setDurataInMesi(3);
+
+        progettoService.inserisciNuovo(progettoInstance);
+    }
+
+    public void testCollegaDipendenteAProgetti() {
+        Dipendente dipendenteInstance = dipendenteService.listAll().stream().findFirst().orElseThrow();
+        List<Long> idsProgetti = progettoService.listAll().stream().map(Progetto::getId_progetto).toList();
+
+        dipendenteService.collegaDipendenteAProgetti(dipendenteInstance.getId_dipendente(), idsProgetti);
+    }
+
+    public void testCollegaProgettoADipendenti() {
+        Progetto progettoInstance = progettoService.listAll().stream().findFirst().orElseThrow();
+        List<Long> idsDipendenti = dipendenteService.listAll().stream().map(Dipendente::getId_dipendente).toList();
+
+        progettoService.collegaProgettoADipendenti(progettoInstance.getId_progetto(), idsDipendenti);
+    }
 }

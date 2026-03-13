@@ -16,4 +16,7 @@ public interface DipendenteService
 
    void inserisciNuovoDipendenteConSocieta(Long idSocieta, Dipendente dipendenteInstance);
 
+   void collegaDipendenteAProgetti(Long idDipendente, List<Long> idsProgetti);
+
+
 }

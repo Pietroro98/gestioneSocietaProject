@@ -1,14 +1,19 @@
 package it.prova.gestionesocieta.service.dipendente;
 
 import it.prova.gestionesocieta.model.Dipendente;
+import it.prova.gestionesocieta.model.Progetto;
 import it.prova.gestionesocieta.model.Societa;
 import it.prova.gestionesocieta.reporitory.DipendenteRepository;
+import it.prova.gestionesocieta.reporitory.ProgettoRepository;
 import it.prova.gestionesocieta.reporitory.SocietaRepository;
+import it.prova.gestionesocieta.service.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -20,9 +25,15 @@ public class DipendenteServiceImpl implements DipendenteService
 
     @Autowired
     private SocietaRepository societaRepository;
+    @Autowired
+    private ProgettoRepository progettoRepository;
+
+    @Autowired
+    private Utils utils;
 
 
     @Override
+    @Transactional
     public List<Dipendente> listAll() {
         return (List<Dipendente>) dipendenteRepository.findAll();
     }
@@ -69,5 +80,21 @@ public class DipendenteServiceImpl implements DipendenteService
 
         societaInstance.addDipendente(dipendenteInstance);
         dipendenteRepository.save(dipendenteInstance);
+    }
+
+    @Override
+    @Transactional
+    public void collegaDipendenteAProgetti(Long idDipendente, List<Long> idsProgetti)
+    {
+        Dipendente dipendenteInstance = dipendenteRepository.findById(idDipendente)
+                .orElseThrow(() -> new RuntimeException("Dipendente non trovato"));
+
+        List<Progetto> progetti = (List<Progetto>) progettoRepository.findAllById(idsProgetti);
+        Set<Progetto> progettoDaCollegare = progetti
+                .stream()
+                .peek(p -> utils.valida(dipendenteInstance, p))
+                .collect(Collectors.toSet());
+
+        dipendenteInstance.getProgetti().addAll(progettoDaCollegare);
     }
 }
