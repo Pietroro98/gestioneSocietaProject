@@ -1,10 +1,10 @@
 package it.prova.gestionesocieta.service.societa;
-import io.micrometer.common.util.StringUtils;
 import it.prova.gestionesocieta.model.Societa;
 import it.prova.gestionesocieta.reporitory.SocietaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,11 +63,11 @@ public class SocietaServiceImpl implements SocietaService
 
         StringBuilder queryBuilder = new StringBuilder("select s from Societa s where s.id = s.id ");
 
-        if (StringUtils.isNotEmpty(example.getRagioneSociale())) {
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(example.getRagioneSociale())) {
             whereClauses.add(" s.ragioneSociale  like :rag ");
             paramaterMap.put("rag", "%" + example.getRagioneSociale() + "%");
         }
-        if (StringUtils.isNotEmpty(example.getIndirizzo())) {
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(example.getIndirizzo())) {
             whereClauses.add(" s.indirizzo like :indirizzo ");
             paramaterMap.put("indirizzo", "%" + example.getIndirizzo() + "%");
         }
@@ -84,6 +84,7 @@ public class SocietaServiceImpl implements SocietaService
     }
 
     @Override
+    @Transactional
     public void rimozioneSocietaConControllo(Long idSocieta)
     {
         Societa societaInstance = caricaSingolo(idSocieta);

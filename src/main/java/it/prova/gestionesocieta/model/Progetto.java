@@ -79,7 +79,6 @@ public class Progetto
                 ", nome='" + nome + '\'' +
                 ", cliente='" + cliente + '\'' +
                 ", durataInMesi=" + durataInMesi +
-                ", dipendenti=" + dipendenti.size() +
                 '}';
     }
 }

@@ -11,4 +11,9 @@ public interface DipendenteService
    public Dipendente caricaSingolo(Long id);
 
    public void aggiorna(Dipendente dipendenteInstance);
+
+   public void inserisciDipendente(Dipendente dipendenteInstance);
+
+   void inserisciNuovoDipendenteConSocieta(Long idSocieta, Dipendente dipendenteInstance);
+
 }

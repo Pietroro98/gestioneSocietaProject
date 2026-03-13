@@ -1,4 +1,6 @@
 package it.prova.gestionesocieta.service;
+import it.prova.gestionesocieta.model.Dipendente;
+import it.prova.gestionesocieta.model.Progetto;
 import it.prova.gestionesocieta.model.Societa;
 import it.prova.gestionesocieta.service.dipendente.DipendenteService;
 import it.prova.gestionesocieta.service.progetto.ProgettoService;
@@ -48,8 +50,29 @@ public class BatteriaDiTestService {
         System.out.println("Societa trovate: " + risultati.size());
     }
 
-    public void testRimozioneSocietaConControlloSeDipendentiPresenti()
-    {
-        
+    public void testRimozioneSocietaConDipendenti() {
+        Societa societa = societaService.listAll().get(0);
+        Societa societaInstance = societaService.findByExample(societa).stream().findFirst().orElse(null);
+
+        assert societaInstance != null;
+        societaService.rimozioneSocietaConControllo(societaInstance.getId_societa());
+
     }
+
+    public void testInserisciDipendenteConSocieta()
+    {
+        Societa societa = societaService.listAll().get(0);
+
+        Societa societaInstance = societaService.findByExample(societa).stream().findFirst().orElse(null);
+
+        Dipendente dipendenteInstance = new Dipendente();
+        dipendenteInstance.setNome("Mario");
+        dipendenteInstance.setCognome("Rossi");
+        dipendenteInstance.setDataAssunzione(LocalDate.of(1990, 1, 10));
+        dipendenteInstance.setRedditoAnnuoLordo(32000);
+
+        assert societaInstance != null;
+        dipendenteService.inserisciNuovoDipendenteConSocieta(societaInstance.getId_societa(), dipendenteInstance);
+    }
+
 }

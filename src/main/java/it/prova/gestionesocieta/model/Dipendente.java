@@ -112,8 +112,6 @@ public class Dipendente {
                 ", cognome='" + cognome + '\'' +
                 ", dataAssuzione="+ dataAssunzioneString +
                 ", redditoAnnuoLordo=" + redditoAnnuoLordo +
-                ", societa=" + societa +
-                ", progetti=" + progetti.size() +
                 '}';
     }
 }

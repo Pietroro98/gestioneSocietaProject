@@ -87,6 +87,18 @@ public class Societa
         this.dipendenti = dipendenti;
     }
 
+    public void addDipendente(Dipendente dipendente) {
+        this.dipendenti.add(dipendente);
+        dipendente.setSocieta(this);
+    }
+
+    public void removeDipendente(Dipendente dipendente) {
+        this.dipendenti.remove(dipendente);
+        if (dipendente != null) {
+            dipendente.setSocieta(null);
+        }
+    }
+
     @Override
     public String toString()
     {
@@ -98,7 +110,6 @@ public class Societa
                 ", indirizzo='" + indirizzo + '\'' +
                 ", dataFondazione=" + dataFondazioneString +
                 ", dataChiusura=" + dataChiusuraString +
-                ", dipendenti=" + dipendenti.size() +
                 '}';
     }
 }
