@@ -15,5 +15,6 @@ public interface ProgettoService {
 
     public void collegaProgettoADipendenti(Long idProgetto, List<Long> idsDipendenti);
 
+    public List<String> listClientiBySocieta(Long idSocieta);
 
 }

@@ -31,6 +31,7 @@ public class GestionesocietaApplication implements CommandLineRunner {
 		batteriaDiTestService.testInserisciProgetto();
 		batteriaDiTestService.testCollegaDipendenteAProgetti();
 		batteriaDiTestService.testCollegaProgettoADipendenti();
+		batteriaDiTestService.testListaClientiDeiProgettiPerSocieta();
 
 		System.out.println("################ FINE - PASSED  #################");
 	}

@@ -102,5 +102,12 @@ public class BatteriaDiTestService {
         progettoService.collegaProgettoADipendenti(progettoInstance.getId_progetto(), idsDipendenti);
     }
 
+    public void testListaClientiDeiProgettiPerSocieta() {
+        Societa societaInstance = societaService.listAll().stream().findFirst().orElseThrow();
+        List<String> clienti = progettoService.listClientiBySocieta(societaInstance.getId_societa());
+
+        System.out.println("Clienti dei progetti per societa :" + societaInstance.getRagioneSociale() + ": " + clienti);
+    }
+
 
 }

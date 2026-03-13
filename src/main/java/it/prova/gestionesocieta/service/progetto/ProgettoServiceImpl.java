@@ -71,4 +71,9 @@ public class ProgettoServiceImpl implements ProgettoService
 
         progettoInstance.getDipendenti().addAll(dipendentiDaCollegare);
     }
+
+    @Override
+    public List<String> listClientiBySocieta(Long idSocieta) {
+        return progettoRepository.findClientiBySocietaId(idSocieta);
+    }
 }
