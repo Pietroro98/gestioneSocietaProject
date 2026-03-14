@@ -17,4 +17,8 @@ public interface ProgettoService {
 
     public List<String> listClientiBySocieta(Long idSocieta);
 
+    public List<String> listRagioniSocialiSocietaConProgettiDurataMaggioreDiUnAnno();
+
+    public List<Progetto> listProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
+
 }

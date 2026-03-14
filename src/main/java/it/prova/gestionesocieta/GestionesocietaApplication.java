@@ -32,7 +32,8 @@ public class GestionesocietaApplication implements CommandLineRunner {
 		batteriaDiTestService.testCollegaDipendenteAProgetti();
 		batteriaDiTestService.testCollegaProgettoADipendenti();
 		batteriaDiTestService.testListaClientiDeiProgettiPerSocieta();
-
+		batteriaDiTestService.testListaNomiSocietaConProgettiDurataMaggioreDiUnAnno();
+		batteriaDiTestService.testListaProgettiConAlmenoUnDipendenteConRalDa30000();
 		System.out.println("################ FINE - PASSED  #################");
 	}
 }

@@ -83,7 +83,7 @@ public class BatteriaDiTestService {
         Progetto progettoInstance = new Progetto();
         progettoInstance.setNome("Migrazione su Spring");
         progettoInstance.setCliente("Cliente test uno");
-        progettoInstance.setDurataInMesi(3);
+        progettoInstance.setDurataInMesi(13);
 
         progettoService.inserisciNuovo(progettoInstance);
     }
@@ -109,5 +109,15 @@ public class BatteriaDiTestService {
         System.out.println("Clienti dei progetti per societa :" + societaInstance.getRagioneSociale() + ": " + clienti);
     }
 
+    public void testListaNomiSocietaConProgettiDurataMaggioreDiUnAnno() {
+        List<String> ragioniSociali = progettoService.listRagioniSocialiSocietaConProgettiDurataMaggioreDiUnAnno();
+        System.out.println("Societa con progetti di durata maggiore di un anno: " + ragioniSociali);
+    }
+
+    public void testListaProgettiConAlmenoUnDipendenteConRalDa30000() {
+        List<Progetto> progetti = progettoService.listProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
+
+        System.out.println("Progetti con almeno un dipendente con RAL da 30000: " + progetti);
+    }
 
 }

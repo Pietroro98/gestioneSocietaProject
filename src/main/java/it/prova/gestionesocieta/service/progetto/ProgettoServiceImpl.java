@@ -76,4 +76,14 @@ public class ProgettoServiceImpl implements ProgettoService
     public List<String> listClientiBySocieta(Long idSocieta) {
         return progettoRepository.findClientiBySocietaId(idSocieta);
     }
+
+    @Override
+    public List<String> listRagioniSocialiSocietaConProgettiDurataMaggioreDiUnAnno() {
+        return progettoRepository.findRagioniSocialiSocietaConProgettiDurataMaggioreDiUnAnno();
+    }
+
+    @Override
+    public List<Progetto> listProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000() {
+        return progettoRepository.findAllProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
+    }
 }
