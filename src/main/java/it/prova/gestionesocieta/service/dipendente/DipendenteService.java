@@ -18,5 +18,6 @@ public interface DipendenteService
 
    void collegaDipendenteAProgetti(Long idDipendente, List<Long> idsProgetti);
 
+   Dipendente trovaDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi();
 
 }

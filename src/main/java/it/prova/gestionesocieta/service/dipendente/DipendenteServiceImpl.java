@@ -97,4 +97,9 @@ public class DipendenteServiceImpl implements DipendenteService
 
         dipendenteInstance.getProgetti().addAll(progettoDaCollegare);
     }
+
+    @Override
+    public Dipendente trovaDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi() {
+        return dipendenteRepository.findTopDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi();
+    }
 }

@@ -111,13 +111,20 @@ public class BatteriaDiTestService {
 
     public void testListaNomiSocietaConProgettiDurataMaggioreDiUnAnno() {
         List<String> ragioniSociali = progettoService.listRagioniSocialiSocietaConProgettiDurataMaggioreDiUnAnno();
-        System.out.println("Societa con progetti di durata maggiore di un anno: " + ragioniSociali);
+        System.out.println("Lista dei nomi delle società con progetti con durata maggiore di un anno: " + ragioniSociali);
     }
 
     public void testListaProgettiConAlmenoUnDipendenteConRalDa30000() {
         List<Progetto> progetti = progettoService.listProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
 
-        System.out.println("Progetti con almeno un dipendente con RAL da 30000: " + progetti);
+        System.out.println("Lista di progetti  in cui lavora almeno un dipendente con una RAL a partire da 30000: " + progetti);
+    }
+
+    public void testDipendentePiuAnzianoLavorativamenteDiSocietaFondatePrimaDel1990ConProgettoDiAlmenoSeiMesi() {
+        Dipendente dipendente = dipendenteService
+                .trovaDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi();
+
+        System.out.println("dipendente più anziano  - lavorativamente parlando – delle società fondate prima del 1990 e che lavora su progetto che dura almeno 6 mesi.: " + dipendente);
     }
 
 }
