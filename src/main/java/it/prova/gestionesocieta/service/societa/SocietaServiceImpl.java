@@ -103,4 +103,9 @@ public class SocietaServiceImpl implements SocietaService
     public void rimuovi(Long idSocieta) {
         societaRepository.deleteById(idSocieta);
     }
+
+    @Override
+    public List<Societa> listSocietaAnomaleConDipendenteAssuntoPrimaDellaFondazione() {
+        return societaRepository.findAllSocietaAnomaleConDipendenteAssuntoPrimaDellaFondazione();
+    }
 }

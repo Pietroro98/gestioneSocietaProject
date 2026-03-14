@@ -69,7 +69,10 @@ public class ProgettoServiceImpl implements ProgettoService
                 .peek(d -> utils.valida(d, progettoInstance))
                 .collect(Collectors.toSet());
 
-        progettoInstance.getDipendenti().addAll(dipendentiDaCollegare);
+        for (Dipendente dipendenteItem : dipendentiDaCollegare) {
+            dipendenteItem.getProgetti().add(progettoInstance);
+            progettoInstance.getDipendenti().add(dipendenteItem);
+        }
     }
 
     @Override
@@ -83,7 +86,12 @@ public class ProgettoServiceImpl implements ProgettoService
     }
 
     @Override
-    public List<Progetto> listProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000() {
-        return progettoRepository.findAllProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
+    public List<Progetto> listProgettiConAlmenoUnDipendenteConRalMaggioreOUguale(Integer reddito) {
+        return progettoRepository.findAllProgettiConAlmenoUnDipendenteConRalMaggioreOUguale(reddito);
+    }
+
+    @Override
+    public List<Progetto> listProgettiAnomaliConAlmenoUnDipendenteDiSocietaChiusa() {
+        return progettoRepository.findAllProgettiAnomaliConAlmenoUnDipendenteDiSocietaChiusa();
     }
 }

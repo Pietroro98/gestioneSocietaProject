@@ -115,16 +115,64 @@ public class BatteriaDiTestService {
     }
 
     public void testListaProgettiConAlmenoUnDipendenteConRalDa30000() {
-        List<Progetto> progetti = progettoService.listProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
+        List<Progetto> progetti = progettoService.listProgettiConAlmenoUnDipendenteConRalMaggioreOUguale(30000);
 
         System.out.println("Lista di progetti  in cui lavora almeno un dipendente con una RAL a partire da 30000: " + progetti);
     }
 
     public void testDipendentePiuAnzianoLavorativamenteDiSocietaFondatePrimaDel1990ConProgettoDiAlmenoSeiMesi() {
         Dipendente dipendente = dipendenteService
-                .trovaDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi();
+                .trovaDipendentePiuAnzianoPerDataFondazioneLimiteEProgettoDurataMinima(LocalDate.of(1990, 1, 1), 6);
 
         System.out.println("dipendente più anziano  - lavorativamente parlando – delle società fondate prima del 1990 e che lavora su progetto che dura almeno 6 mesi.: " + dipendente);
+    }
+
+    public void testListaProgettiAnomaliConInserimentoAnomalia() {
+        Societa societaChiusa = new Societa();
+        societaChiusa.setRagioneSociale("Closed Projects SPA");
+        societaChiusa.setIndirizzo("Via Torino 99");
+        societaChiusa.setDataFondazione(LocalDate.of(1988, 4, 10));
+        societaChiusa.setDataChiusura(LocalDate.of(2026, 12, 31));
+        societaService.inserisciNuovoConControlloDuplicato(societaChiusa);
+
+        Dipendente dipendenteAnomalo = new Dipendente();
+        dipendenteAnomalo.setNome("Luigi");
+        dipendenteAnomalo.setCognome("Bianchi");
+        dipendenteAnomalo.setDataAssunzione(LocalDate.of(2026, 1, 10));
+        dipendenteAnomalo.setRedditoAnnuoLordo(31000);
+        dipendenteService.inserisciNuovoDipendenteConSocieta(societaChiusa.getId_societa(), dipendenteAnomalo);
+
+        Progetto progettoAnomalo = new Progetto();
+        progettoAnomalo.setNome("Progetto Anomalo Societa Chiusa");
+        progettoAnomalo.setCliente("Cliente anomalia");
+        progettoAnomalo.setDurataInMesi(6);
+        progettoService.inserisciNuovo(progettoAnomalo);
+
+        progettoService.collegaProgettoADipendenti(progettoAnomalo.getId_progetto(),
+                List.of(dipendenteAnomalo.getId_dipendente()));
+
+        List<Progetto> progettiAnomali = progettoService.listProgettiAnomaliConAlmenoUnDipendenteDiSocietaChiusa();
+        System.out.println("Lista di Progetti anomali cioe quelli in cui e presente almeno un dipendente in cui la societa sia stata chiusa: " + progettiAnomali);
+
+    }
+
+    public void testListaSocietaAnomaleConDipendenteAssuntoPrimaDellaFondazione() {
+        Societa societaAnomala = new Societa();
+        societaAnomala.setRagioneSociale("Founding Date Error SRL");
+        societaAnomala.setIndirizzo("Via Firenze 21");
+        societaAnomala.setDataFondazione(LocalDate.of(2000, 5, 20));
+        societaService.inserisciNuovoConControlloDuplicato(societaAnomala);
+
+        Dipendente dipendenteAnomalo = new Dipendente();
+        dipendenteAnomalo.setNome("Anna");
+        dipendenteAnomalo.setCognome("Verdi");
+        dipendenteAnomalo.setDataAssunzione(LocalDate.of(1998, 3, 15));
+        dipendenteAnomalo.setRedditoAnnuoLordo(28000);
+        dipendenteAnomalo.setSocieta(societaAnomala);
+        dipendenteService.inserisciDipendente(dipendenteAnomalo);
+
+        List<Societa> societaAnomale = societaService.listSocietaAnomaleConDipendenteAssuntoPrimaDellaFondazione();
+        System.out.println("Lista di societa anomale cioe quelle in cui figura almeno un dipendente con data assunzione precedente alla data Fondazione: " + societaAnomale);
     }
 
 }

@@ -19,6 +19,8 @@ public interface ProgettoService {
 
     public List<String> listRagioniSocialiSocietaConProgettiDurataMaggioreDiUnAnno();
 
-    public List<Progetto> listProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
+    public List<Progetto> listProgettiConAlmenoUnDipendenteConRalMaggioreOUguale(Integer reddito);
+
+    public List<Progetto> listProgettiAnomaliConAlmenoUnDipendenteDiSocietaChiusa();
 
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -99,7 +100,9 @@ public class DipendenteServiceImpl implements DipendenteService
     }
 
     @Override
-    public Dipendente trovaDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi() {
-        return dipendenteRepository.findTopDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi();
+    public Dipendente trovaDipendentePiuAnzianoPerDataFondazioneLimiteEProgettoDurataMinima(LocalDate dataFondazioneLimite,
+                                                                                            Integer durataMinima) {
+        return dipendenteRepository.findTopDipendentePiuAnzianoPerDataFondazioneLimiteEProgettoDurataMinima(
+                dataFondazioneLimite, durataMinima);
     }
 }

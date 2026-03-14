@@ -20,4 +20,6 @@ public interface SocietaService
 
     public void rimuovi(Long idSocieta);
 
+    public List<Societa> listSocietaAnomaleConDipendenteAssuntoPrimaDellaFondazione();
+
 }

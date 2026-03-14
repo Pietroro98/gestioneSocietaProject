@@ -31,12 +31,23 @@ public interface ProgettoRepository extends CrudRepository<Progetto, Long>, Quer
     List<String> findRagioniSocialiSocietaConProgettiDurataMaggioreDiUnAnno();
 
     @Query(value = """
-      select distinct p.*
-      from progetto p
-      join dipendente_progetto dp on dp.progetto_id = p.id_progetto
-      join dipendente d on d.id_dipendente = dp.dipendente_id
-      where d.redditoAnnuoLordo >= 30000
-      order by p.nome
-        """, nativeQuery = true)
-    List<Progetto> findAllProgettiConAlmenoUnDipendenteConRalMaggioreOUgualeA30000();
+          select distinct p.*
+          from progetto p
+          join dipendente_progetto dp on dp.progetto_id = p.id_progetto
+          join dipendente d on d.id_dipendente = dp.dipendente_id
+          where d.redditoAnnuoLordo >= :reddito
+          order by p.nome
+            """, nativeQuery = true)
+    List<Progetto> findAllProgettiConAlmenoUnDipendenteConRalMaggioreOUguale(@Param("reddito") Integer reddito);
+
+    @Query(value = """
+          select distinct p.*
+          from progetto p
+          join dipendente_progetto dp on dp.progetto_id = p.id_progetto
+          join dipendente d on d.id_dipendente = dp.dipendente_id
+          join societa s on s.id_societa = d.societa_id
+          where s.dataChiusura is not null
+          order by p.nome
+            """, nativeQuery = true)
+    List<Progetto> findAllProgettiAnomaliConAlmenoUnDipendenteDiSocietaChiusa();
 }

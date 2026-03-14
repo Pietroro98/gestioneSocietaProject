@@ -2,6 +2,7 @@ package it.prova.gestionesocieta.service.dipendente;
 
 import it.prova.gestionesocieta.model.Dipendente;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DipendenteService
@@ -18,6 +19,7 @@ public interface DipendenteService
 
    void collegaDipendenteAProgetti(Long idDipendente, List<Long> idsProgetti);
 
-   Dipendente trovaDipendentePiuAnzianoPerSocietaFondataPrimaDel1990EProgettoDiAlmenoSeiMesi();
+   Dipendente trovaDipendentePiuAnzianoPerDataFondazioneLimiteEProgettoDurataMinima(LocalDate dataFondazioneLimite,
+                                                                                      Integer durataMinima);
 
 }
